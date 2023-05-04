@@ -27,6 +27,6 @@
 1. 修改CmakeLists.txt中的`SDK_DIR`为T5 SDK路径
 2. 修改`common.h`中的摄像头分辨率，fb大小等参数
 3. `cd build`
-4. `cmake ..` 然后 `make`,便能看到`v4l2_to_screen`的执行文件。
+4. `cmake ..` 然后 `make`,便能看到`v4l2-to-screen`的执行文件。
 5. 将生成的`v4l2_to_screen`放入开发板中，并将shader_source中的文件放入开发板的root目录下
 6. 执行`v4l2_to_screen`即可
