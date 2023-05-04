@@ -2,11 +2,7 @@
 
 ### 环境
 
-> 编译环境:Ubuntu 18.04 LTS
-
-> 平台:Allwinner T507
-
-> 交叉编译工具链: aarch64-linux-gnu(详细请看CmakeLists)
+> 编译环境:Ubuntu 18.04 LTS<br>平台:Allwinner T507<br>交叉编译工具链: aarch64-linux-gnu(详细请看CmakeLists)
 
 ### 简介
 
