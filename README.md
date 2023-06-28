@@ -1,5 +1,9 @@
 ## 全志T507平台利用openGL和v4l2显示摄像头程序
 
+### 分支特点
+
+该分支用来将v4l2的图像利用全志的硬件编解码器进行录像
+
 ### 环境
 
 > 编译环境:Ubuntu 18.04 LTS<br>平台:Allwinner T507<br>交叉编译工具链: aarch64-linux-gnu(详细请看CmakeLists)
