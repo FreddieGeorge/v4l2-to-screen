@@ -751,9 +751,10 @@ int CT507Graphics::fullScreenMode()
     pthread_mutex_lock(&dataMutex);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, vertex_coord);
     glEnableVertexAttribArray(0);
-    if (pic_height == 1088)
+    /*if (pic_height == 1088)
         glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, tex_coord1088p);
-    else if (pic_height == 1080)
+    else */
+    if (pic_height == 1080)
         glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, tex_coord1080p);
     else if (pic_height == 720)
         glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, tex_coord720p);
@@ -761,7 +762,7 @@ int CT507Graphics::fullScreenMode()
     glEnableVertexAttribArray(1);
     glBindTexture(GL_TEXTURE_EXTERNAL_OES, tex);
 
-    glViewport(0, 0, SCREEN_W, SCREEN_H);
+    glViewport(640, 0, 1280, 720);
 
     glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
 
