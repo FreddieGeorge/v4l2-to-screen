@@ -57,6 +57,11 @@ public:
     int quitBuffer(int);       // 出队
     color_t *getBuffer(int);   // 获取视频缓存地址
     unsigned int getSize(int); // 获取buffer长度
+
+    // ctrl
+    int setMirror(bool bMirror);
+    int setFlip(bool bFlip);
+    int setMirrorAndFlip(bool bMirror, bool bFlip);
     // class UltraFcw m_fcw;
 };
 

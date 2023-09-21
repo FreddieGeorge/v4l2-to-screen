@@ -59,14 +59,70 @@ static GLfloat vertex_coord[] =
     1.0f, -1.0f, 0.0f,  // C点
     -1.0f, -1.0f, 0.0f, // D点
 };
-// 纹理坐标
-static GLfloat tex_coord1088p[] =
+
+
+// 垂直翻转
+static GLfloat vertex_coordFlip[] = 
 {
-    0.0f, 0.0f,
-    1.0f,0.0f,
-    1.0f,1.0f,
-    0.0f,1.0f,
+	-1.0f, -1.0f, 0.0f,
+	1.0f, -1.0f, 0.0f,
+	1.0f, 1.0f, 0.0f,
+	-1.0f, 1.0f, 0.0f,
 };
+
+// 左旋90度: 这个相当于是将原始的四个顶点坐标右转了90度 那为什么显示效果还是画面向左旋转了90度呢?
+// 原因是因为顶点坐标与纹理坐标是按照顺序一一对应的 对于原始的纹理坐标为A' B' C' D' 他们之间的对应
+// 关系就是A-A' B-B' C-C' D-D' 如果顶点坐标旋转之后 对应关系就变成了D-A' A-B' C-D' D-A' 那么就相当于
+// 纹理图像(也就是视频画面)被左旋转了90度了
+static GLfloat vertex_coordL90[] = 
+{
+	-1.0f, -1.0f, 0.0f,  // D点
+	-1.0f, 1.0f, 0.0f,   // A点
+	1.0f, 1.0f, 0.0f,    // B点
+	1.0f, -1.0f, 0.0f,   // C点
+};
+static GLfloat hei_vertex_coordL90[] = 
+{
+	-0.342f, -1.0f, 0.0f,  // D点
+	-0.342f, 1.0f, 0.0f,   // A点
+	0.342f, 1.0f, 0.0f,    // B点
+	0.342f, -1.0f, 0.0f,   // C点
+};
+
+// 旋180°
+static GLfloat vertex_coord180[] = 
+{
+     1.0f, -1.0f, 0.0f,   // A点
+    -1.0f, -1.0f, 0.0f,   // B点
+    -1.0f,  1.0f, 0.0f,   // C点
+     1.0f,  1.0f, 0.0f,   // D点
+};
+// 右旋90度
+static GLfloat vertex_coordR90[] = 
+{
+	1.0f, 1.0f, 0.0f,
+	1.0f, -1.0f, 0.0f,
+	-1.0f, -1.0f, 0.0f,
+	-1.0f, 1.0f, 0.0f,
+};
+
+// 镜像加翻转
+static GLfloat vertex_coordMF[] = 
+{
+	1.0f, -1.0f, 0.0f,
+	-1.0f, -1.0f, 0.0f,
+	-1.0f, 1.0f, 0.0f,
+	1.0f, 1.0f, 0.0f,
+};
+
+// 纹理坐标
+// static GLfloat tex_coord1088p[] =
+// {
+//     0.0f, 0.0f,
+//     1.0f,0.0f,
+//     1.0f,1.0f,
+//     0.0f,1.0f,
+// };
 
 static GLfloat tex_coord1080p[] =
 {
@@ -77,6 +133,30 @@ static GLfloat tex_coord1080p[] =
 };
 
 static GLfloat tex_coord720p[] =
+{
+    0.0f,0.0f,
+    0.666f,0.0f,
+    0.666f,0.661f,
+    0.0f,0.661f,
+};
+// 单画面旋转90度后不拉伸的裁剪
+// static GLfloat tex_coord1088p_r90[] =
+// {
+//     0.0f, 0.0f,
+//     1.0f,0.0f,
+//     1.0f,1.0f,
+//     0.0f,1.0f,
+// };
+
+static GLfloat tex_coord1080p_r90[] =
+{
+    0.395f,0.0f,
+    0.605f,0.0f,
+    0.605f,0.992f,
+    0.395f,0.992f,
+};
+
+static GLfloat tex_coord720p_r90[] =
 {
     0.0f,0.0f,
     0.666f,0.0f,

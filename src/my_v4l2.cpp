@@ -51,7 +51,7 @@ my_v4l2::my_v4l2(char *filename)
     format.type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE;
     if (ioctl(v4l2_fd, VIDIOC_G_FMT, &format) == -1)
     {
-        printf("VIDIOC_S_FMT error !\n");
+        printf("VIDIOC_G_FMT error !\n");
     }
     printf("V4L2: getting format: %c%c%c%c %ux%u\n", pixfmtstr(format.fmt.pix_mp.pixelformat), format.fmt.pix_mp.width, format.fmt.pix_mp.height);
 
@@ -66,12 +66,10 @@ my_v4l2::my_v4l2(char *filename)
     if (ioctl(v4l2_fd, VIDIOC_S_FMT, &format) == -1)
     {
         printf("VIDIOC_S_FMT error !\n");
-    }
-    else
-    {
-        printf("VIDIOC_S_FMT success \n");
         return;
     }
+    else
+        printf("VIDIOC_S_FMT success ?  \n");
 
     isInit = 1;
 }
@@ -259,4 +257,56 @@ unsigned int my_v4l2::getSize(int index)
 int my_v4l2::getInitStatus()
 {
     return isInit;
+}
+
+int my_v4l2::setMirror(bool bMirror)
+{
+    struct v4l2_control control;
+
+    printf("setMirrorAndFlip. mirror=%d\n", bMirror);
+
+    if (!isInit)
+    {
+        printf("VI not created!\n");
+        return -1;
+    }
+
+    control.id = V4L2_CID_HFLIP;
+    control.value = bMirror;
+    if (-1 == ioctl(v4l2_fd, VIDIOC_S_CTRL, &control))
+    {
+        printf("VIDIOC_S_CTRL failed\n");
+        return -1;
+    }
+    return 0;
+}
+
+int my_v4l2::setFlip(bool bFlip)
+{
+    struct v4l2_control control;
+
+    printf("setMirrorAndFlip.flip=%d\n", bFlip);
+
+    if (!isInit)
+    {
+        printf("VI not created!\n");
+        return -1;
+    }
+
+    control.id = V4L2_CID_VFLIP;
+    control.value = bFlip;
+    if (-1 == ioctl(v4l2_fd, VIDIOC_S_CTRL, &control))
+    {
+        printf("VIDIOC_S_CTRL failed\n");
+        return -1;
+    }
+    return 0;
+}
+
+int my_v4l2::setMirrorAndFlip(bool bMirror, bool bFlip)
+{
+    if(setFlip(bFlip) != 0 | setMirror(bMirror) != 0)
+        return -1;
+
+    return 0;
 }
